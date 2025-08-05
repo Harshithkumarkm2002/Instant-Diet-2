@@ -1,0 +1,92 @@
+[
+  {
+    "id": "rice",
+    "name": "Rice",
+    "unit": "g",
+    "base_quantity": 100,
+    "base_price": 50,
+    "min_qty": 50,
+    "step": 50,
+    "image": "/static/images/rice.jpeg"
+  },
+  {
+    "id": "dal",
+    "name": "Dal",
+    "unit": "bowl",
+    "base_quantity": 1,
+    "base_price": 15,
+    "min_qty": 1,
+    "step": 1,
+    "image": "/static/images/dal.jpeg"
+  },
+  {
+    "id": "curd",
+    "name": "Curd",
+    "unit": "ml",
+    "base_quantity": 100,
+    "base_price": 15,
+    "min_qty": 100,
+    "step": 50,
+    "image": "/static/images/curd.jpg"
+  },
+  {
+    "id": "boiled_egg",
+    "name": "Boiled Egg",
+    "unit": "egg",
+    "base_quantity": 1,
+    "base_price": 8,
+    "min_qty": 1,
+    "step": 1,
+    "image": "/static/images/egg.jpg"
+  },
+  {
+    "id": "omelet",
+    "name": "Omelet",
+    "unit": "omelet",
+    "base_quantity": 1,
+    "base_price": 10,
+    "min_qty": 1,
+    "step": 1,
+    "image": "/static/images/omelet.jpeg"
+  },
+  {
+    "id": "oats",
+    "name": "Oats (Meal)",
+    "unit": "g",
+    "base_quantity": 50,
+    "base_price": 30,
+    "min_qty": 50,
+    "step": 50,
+    "image": "/static/images/oats.jpeg"
+  },
+  {
+    "id": "soya",
+    "name": "Soya",
+    "unit": "g",
+    "base_quantity": 50,
+    "base_price": 25,
+    "min_qty": 50,
+    "step": 50,
+    "image": "/static/images/soya.jpg"
+  },
+  {
+    "id": "paneer",
+    "name": "Paneer (Tawa Roast)",
+    "unit": "g",
+    "base_quantity": 50,
+    "base_price": 45,
+    "min_qty": 50,
+    "step": 50,
+    "image": "/static/images/paneer.jpg"
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken (Tawa Roast)",
+    "unit": "g",
+    "base_quantity": 50,
+    "base_price": 35,
+    "min_qty": 50,
+    "step": 50,
+    "image": "/static/images/chicken.jpg"
+  }
+]

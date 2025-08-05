@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Your Goal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .goal-container {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      color: #00eaff;
+      margin-bottom: 30px;
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .goal-card {
+      background: #111;
+      border: 1px solid #00eaff44;
+      padding: 30px 20px;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .goal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00eaff88;
+    }
+
+    .goal-card h3 {
+      color: #00eaff;
+      margin-bottom: 10px;
+    }
+
+    .goal-card p {
+      color: #ccc;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 0 10px;
+    }
+
+    .goal-card a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .goal-card a:hover {
+      background: #00cce6;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="goal-container">
+    <h1>Select Your Fitness Goal</h1>
+    <div class="goal-grid">
+      
+      <div class="goal-card">
+        <h3>Weight Gain & Bulking</h3>
+        <p>High-calorie, protein-rich meals to help you gain weight and muscle mass effectively.</p>
+        <a href="{{ url_for('show_diet_options', goal='gain') }}">Explore Plans</a>
+      </div>
+
+      <div class="goal-card">
+        <h3>Weight Loss & Cutting</h3>
+        <p>Low-calorie, macro-balanced meals to help you lose fat and retain muscle while cutting.</p>
+        <a href="{{ url_for('show_diet_options', goal='loss') }}">Explore Plans</a>
+
+      </div>
+
+      <div class="goal-card">
+        <h3>Customised Plan</h3>
+        <p>Want something tailor-made? Tell us your goal, lifestyle, and preferences for a personalized plan.</p>
+        <a href="{{ url_for('customize') }}">Explore Plans</a>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

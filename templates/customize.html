@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customize Meal Plan</title>
+  <style>
+    /* Base Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #000000, #0d0d0d);
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    #items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .item-card {
+      background: #222;
+      border-radius: 8px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+      color: #fff;
+    }
+
+    .item-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .qty-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+      gap: 10px;
+    }
+
+    .qty-controls button {
+      background: #00eaff;
+      border: none;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .item-card button {
+      background: #00b3ff;
+      color: #000;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* === Cart Styling === */
+    .cart {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 2px solid #444;
+      background-color: #f9f9f9;
+      color: #000;
+      max-height: 50vh;
+      overflow-y: auto;
+      z-index: 1000;
+      border-radius: 8px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .cart.open {
+      transform: translateY(0);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      color: #fff;
+      padding: 10px;
+      user-select: none;
+    }
+
+    .cart-header h4 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .cart-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    #cart-list {
+      max-height: 40vh;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .cart-total {
+      font-weight: bold;
+      padding: 10px 1rem 1rem;
+    }
+
+    .back-btn {
+      margin: 20px 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .order-section {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .order-section select, .order-section button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .cart {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Customize Your Meal Plan</h1>
+  <div id="items"></div>
+
+  <div class="cart" id="cart">
+    <div class="cart-header" id="cart-header">
+      <h4>Your Cart</h4>
+      <span class="cart-toggle" onclick="toggleCart()">−</span>
+    </div>
+    <ul id="cart-list"></ul>
+    <div class="cart-total">Total: ₹<span id="total">0</span></div>
+    <div style="margin-top: 10px;">
+      <button onclick="resetCart()" style="background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">Reset Cart</button>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <!-- Order Section -->
+  <div class="order-section">
+    <select id="planSelect">
+      <option value="" disabled selected>Select Plan</option>
+      <option value="Day Plan">Day Plan</option>
+      <option value="Weekly Plan (10% OFF)">Weekly Plan (10% OFF)</option>
+      <option value="Monthly Plan (15% OFF)">Monthly Plan (15% OFF)</option>
+    </select>
+    <button onclick="placeOrder()">Order on WhatsApp</button>
+  </div>
+
+  <script>
+    let itemsData = [];
+    const cart = {};
+
+    function calculatePrice(itemName, quantity) {
+      let unitPrice = 0;
+      let baseQuantity = 1;
+      let discount = 0;
+
+      switch (itemName) {
+        case 'Rice':
+          unitPrice = 5; baseQuantity = 50; break;
+        case 'Dal':
+          unitPrice = 15; baseQuantity = 1; break;
+        case 'Curd':
+          unitPrice = 15; baseQuantity = 150; break;
+        case 'Boiled Egg':
+        case 'Omelet':
+          unitPrice = itemName === 'Boiled Egg' ? 8 : 10;
+          baseQuantity = 1;
+          if (quantity > 4) discount = 0.05;
+          break;
+        case 'Oats (Meal)':
+        case 'Soya':
+        case 'Paneer (Tawa Roast)':
+        case 'Chicken (Tawa Roast)':
+          unitPrice = {
+            'Oats (Meal)': 12,
+            'Soya': 10,
+            'Paneer (Tawa Roast)': 50,
+            'Chicken (Tawa Roast)': 35
+          }[itemName];
+          baseQuantity = 50;
+          if (quantity > 100) discount = 0.05;
+          break;
+        default: return 0;
+      }
+
+      const units = quantity / baseQuantity;
+      const total = units * unitPrice;
+      return Math.round(total - total * discount);
+    }
+
+    function updateCartUI() {
+      const cartList = document.getElementById('cart-list');
+      const totalEl = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+
+      Object.entries(cart).forEach(([id, qty]) => {
+        const item = itemsData.find(i => i.id === id);
+        const price = calculatePrice(item.name, qty);
+        total += price;
+
+        const li = document.createElement('li');
+        li.innerText = `${item.name}: ${qty} ${item.unit} - ₹${price}`;
+        
+        // Create a remove button
+        const removeButton = document.createElement('button');
+        removeButton.innerText = 'Remove';
+        removeButton.style.marginLeft = '10px';
+        removeButton.onclick = () => removeFromCart(id);
+        
+        li.appendChild(removeButton);
+        cartList.appendChild(li);
+      });
+
+      totalEl.innerText = total;
+    }
+
+    function createItemCard(item) {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+
+      card.innerHTML = `
+        <img src="${item.image}" alt="${item.name}"/>
+        <h4>${item.name}</h4>
+        <div class="qty-controls">
+          <button onclick="changeQty('${item.id}', -1)">−</button>
+          <span id="qty-${item.id}">${item.min_qty}</span> ${item.unit}
+          <button onclick="changeQty('${item.id}', 1)">+</button>
+        </div>
+        <button onclick="addToCart('${item.id}')">Add to Cart</button>
+      `;
+
+      document.getElementById('items').appendChild(card);
+    }
+
+    function changeQty(id, delta) {
+      const item = itemsData.find(i => i.id === id);
+      const qtyEl = document.getElementById(`qty-${id}`);
+      let currentQty = parseFloat(qtyEl.innerText);
+      const step = item.step;
+      const newQty = Math.max(item.min_qty, currentQty + delta * step);
+      qtyEl.innerText = newQty;
+    }
+
+    function addToCart(id) {
+      const qty = parseFloat(document.getElementById(`qty-${id}`).innerText);
+      cart[id] = qty;
+      updateCartUI();
+      toggleCart(); // Open cart when an item is added
+    }
+
+    function removeFromCart(id) {
+      delete cart[id]; // Remove item from cart
+      updateCartUI(); // Update the cart UI
+    }
+
+    function toggleCart() {
+      const cart = document.getElementById('cart');
+      cart.classList.toggle('open');
+      const toggleIcon = cart.querySelector('.cart-toggle');
+      toggleIcon.textContent = cart.classList.contains('open') ? '−' : '+';
+    }
+
+    // Load items
+    fetch('/api/items')
+      .then(res => res.json())
+      .then(data => {
+        itemsData = data;
+        itemsData.forEach(createItemCard);
+        updateCartUI();
+      });
+
+    function resetCart() {
+      Object.keys(cart).forEach(id => {
+        const item = itemsData.find(i => i.id === id);
+        if (item) {
+          const qtyEl = document.getElementById(`qty-${id}`);
+          qtyEl.innerText = item.min_qty;
+        }
+      });
+      for (let key in cart) delete cart[key];
+      updateCartUI();
+    }
+
+    function placeOrder() {
+      const plan = document.getElementById('planSelect').value;
+      if (!plan) {
+        alert("Please select a plan before ordering.");
+        return;
+      }
+
+      const cartItems = Object.entries(cart);
+      if (cartItems.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      let message = `Hi! I'd like to order the *${plan}* plan.%0A%0A*Cart Items:*%0A`;
+      let total = 0;
+
+      cartItems.forEach(([id, qty]) => {
+        const item = itemsData.find(i => i.id === id);
+        const price = calculatePrice(item.name, qty);
+        total += price;
+        message += `- ${item.name}: ${qty} ${item.unit} = ₹${price}%0A`;
+      });
+
+      let discount = 0;
+      if (plan.includes("Weekly")) {
+        discount = total * 0.10;
+      } else if (plan.includes("Monthly")) {
+        discount = total * 0.15;
+      }
+
+      const finalTotal = total - discount;
+      message += `%0A*Subtotal:* ₹${total.toFixed(2)}`;
+
+      if (discount > 0) {
+        message += `%0A*Discount:* ₹${discount.toFixed(2)}`;
+      }
+
+      message += `%0A*Total Payable:* ₹${finalTotal.toFixed(2)}`;
+
+      const whatsappURL = `https://wa.me/919611637807?text=${message}`;
+      window.open(whatsappURL, '_blank');
+    }
+  </script>
+</body>
+</html>

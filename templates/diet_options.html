@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00eaff;
+      margin-bottom: 20px;
+    }
+
+    .diet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .diet-card {
+      background: #111;
+      border: 1px solid #00eaff44;
+      padding: 25px 20px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+
+    .diet-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #00eaff88;
+    }
+
+    .diet-card h3 {
+      color: #00eaff;
+      margin-bottom: 12px;
+    }
+
+    .diet-card p {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .diet-card a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .diet-card a:hover {
+      background: #00cce6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>{{ title }}</h1>
+  <div class="diet-grid">
+
+    <div class="diet-card">
+      <h3>Veg Plan</h3>
+      <p>Pure vegetarian meals designed for {{ title.lower() }} goals.</p>
+      <a href="{{ url_for('show_plan', goal=goal, diet='veg') }}">View Veg Plan</a>
+    </div>
+
+    <div class="diet-card">
+      <h3>Eggetarian Plan</h3>
+      <p>Includes eggs — ideal for {{ title.lower() }} with extra protein.</p>
+      <a href="{{ url_for('show_plan', goal=goal, diet='eggetarian') }}">View Eggetarian Plan</a>
+    </div>
+
+    <div class="diet-card">
+      <h3>Non-Veg Plan</h3>
+      <p>High-protein meals with chicken & more for faster results.</p>
+      <a href="{{ url_for('show_plan', goal=goal, diet='nonveg') }}">View Non-Veg Plan</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Non-Veg Plan – Weight Gain & Bulking</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      padding: 30px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #ff4f4f;
+    }
+
+    .meal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+
+    .meal-card {
+      background-color: #111;
+      border: 1px solid #ff4f4f33;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .meal-card img {
+      width: 100%;
+      max-width: 220px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .meal-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ccc;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ff4f4f55;
+    }
+
+    th {
+      background-color: #ff4f4f22;
+      color: #ff4f4f;
+    }
+
+    td {
+      color: #eee;
+    }
+
+    @media (max-width: 600px) {
+      table {
+        font-size: 0.8rem;
+      }
+    }
+
+    .action-box {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.back-btn, .order-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.back-btn {
+  background-color: #ccc;
+}
+
+.order-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.order-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>Non-Vegetarian Plan</h1>
+  <h2>Weight Gain & Bulking</h2>
+
+  <div class="meal-gallery">
+    <div class="meal-card">
+      <img src="{{ url_for('static', filename='images/gain_nonveg_plan.jpg') }}" alt="Grilled Chicken + Rice" />
+      <p>Chicken Tawa Roast + Oats + milk + Peanut Butter + Banana + Potato</p>
+    </div>
+  </div>
+
+  <h2>Pricing Table (2 Meals / Day)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="5" style="text-align:center; color:#d62828; font-weight:bold;">
+          🎉 Opening Offer – 15% OFF!
+        </th>
+      </tr>
+      <tr>
+        <th>BW (kg)</th>
+        <th>Daily Price</th>
+        <th>Weekly (6 Days)<br><small>(10% OFF)</small></th>
+        <th>Monthly (24 Days)<br><small>(15% OFF)</small></th>
+        <th>Calories/Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>40 kg</td><td>₹204</td><td>₹1,101</td><td>₹4,146</td><td>2300 kcal</td></tr>
+      <tr><td>45 kg</td><td>₹209</td><td>₹1,130</td><td>₹4,254</td><td>2400 kcal</td></tr>
+      <tr><td>50 kg</td><td>₹214</td><td>₹1,157</td><td>₹4,356</td><td>2500 kcal</td></tr>
+      <tr><td>55 kg</td><td>₹219</td><td>₹1,183</td><td>₹4,458</td><td>2600 kcal</td></tr>
+      <tr><td>60 kg</td><td>₹224</td><td>₹1,210</td><td>₹4,590</td><td>2700 kcal</td></tr>
+      <tr><td>65 kg</td><td>₹229</td><td>₹1,237</td><td>₹4,662</td><td>2800 kcal</td></tr>
+      <tr><td>70 kg</td><td>₹234</td><td>₹1,263</td><td>₹4,761</td><td>2900 kcal</td></tr>
+      <tr><td>75 kg</td><td>₹239</td><td>₹1,290</td><td>₹4,869</td><td>3000 kcal</td></tr>
+      <tr><td>80 kg</td><td>₹244</td><td>₹1,317</td><td>₹4,977</td><td>3100 kcal</td></tr>
+      <tr><td>85 kg</td><td>₹249</td><td>₹1,344</td><td>₹5,085</td><td>3200 kcal</td></tr>
+      <tr><td>90 kg</td><td>₹254</td><td>₹1,371</td><td>₹5,193</td><td>3300 kcal</td></tr>
+      <tr><td>95 kg</td><td>₹259</td><td>₹1,398</td><td>₹5,301</td><td>3400 kcal</td></tr>
+      <tr><td>100 kg</td><td>₹264</td><td>₹1,425</td><td>₹5,409</td><td>3500 kcal</td></tr>
+    </tbody>
+  </table>
+
+<div class="action-box">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="order-section">
+    <select id="bwSelect">
+      <option value="" disabled selected>Select Body Weight</option>
+      <option value="40kg">40 kg</option>
+      <option value="45kg">45 kg</option>
+      <option value="50kg">50 kg</option>
+      <option value="55kg">55 kg</option>
+      <option value="60kg">60 kg</option>
+      <option value="65kg">65 kg</option>
+      <option value="70kg">70 kg</option>
+      <option value="75kg">75 kg</option>
+      <option value="80kg">80 kg</option>
+      <option value="85kg">85 kg</option>
+      <option value="90kg">90 kg</option>
+      <option value="95kg">95 kg</option>
+      <option value="100kg">100 kg</option>
+    </select>
+
+    <select id="planSelect">
+      <option value="" disabled selected>Select Plan</option>
+      <option value="Day Plan">Day Plan</option>
+      <option value="Weekly Plan - 10% OFF">Weekly Plan - 10% OFF</option>
+      <option value="Monthly Plan - 15% OFF">Monthly Plan - 15% OFF</option>
+    </select>
+
+    <button class="order-btn" onclick="orderSelectedPlan()">Order Now</button>
+  </div>
+</div>
+
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  function orderSelectedPlan() {
+    const bw = document.getElementById("bwSelect").value;
+    const plan = document.getElementById("planSelect").value;
+
+    if (!bw || !plan) {
+      alert("Please select both Body Weight and Plan.");
+      return;
+    }
+
+    const phone = "919611637807"; // Your WhatsApp number
+    const message = `Hi, I'm interested in the ${plan} for ${bw} body weight. Please share more details.`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
+</script>
+
+</body>
+</html>
