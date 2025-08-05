@@ -14,3 +14,9 @@ venv/
 
 # VS Code
 .vscode/
+__pycache__/
+*.pyc
+.env
+venv/
+*.sqlite3
+*.db
