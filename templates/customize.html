@@ -212,7 +212,7 @@
         case 'Omelet':
           unitPrice = itemName === 'Boiled Egg' ? 8 : 10;
           baseQuantity = 1;
-          if (quantity > 4) discount = 0.05;
+          if (quantity > 4) discount = 0.00;
           break;
         case 'Oats (Meal)':
         case 'Soya':
@@ -225,7 +225,7 @@
             'Chicken (Tawa Roast)': 35
           }[itemName];
           baseQuantity = 50;
-          if (quantity > 100) discount = 0.05;
+          if (quantity > 100) discount = 0.00;
           break;
         default: return 0;
       }

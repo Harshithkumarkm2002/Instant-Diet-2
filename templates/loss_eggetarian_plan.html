@@ -150,26 +150,27 @@ select {
       <tr>
         <th>BW (kg)</th>
         <th>Daily Price</th>
-        <th>Weekly (10% OFF)</th>
-        <th>Monthly (15% OFF)</th>
+        <th>Weekly[6 Days] (5% OFF)</th>
+        <th>Monthly[24 Days] (8% OFF)</th>
         <th>Calories/Day</th>
         <th>Protein/Day</th>
       </tr>
     </thead>
     <tbody>
-<tr><td>40 kg</td><td>₹229</td><td>₹1,193</td><td>₹4,456</td><td>920 kcal</td><td>60 g</td></tr>
-<tr><td>45 kg</td><td>₹234</td><td>₹1,221</td><td>₹4,568</td><td>980 kcal</td><td>70 g</td></tr>
-<tr><td>50 kg</td><td>₹239</td><td>₹1,249</td><td>₹4,679</td><td>1040 kcal</td><td>80 g</td></tr>
-<tr><td>55 kg</td><td>₹244</td><td>₹1,276</td><td>₹4,770</td><td>1100 kcal</td><td>90 g</td></tr>
-<tr><td>60 kg</td><td>₹249</td><td>₹1,301</td><td>₹4,860</td><td>1160 kcal</td><td>100 g</td></tr>
-<tr><td>65 kg</td><td>₹254</td><td>₹1,327</td><td>₹4,949</td><td>1220 kcal</td><td>110 g</td></tr>
-<tr><td>70 kg</td><td>₹259</td><td>₹1,353</td><td>₹5,039</td><td>1280 kcal</td><td>120 g</td></tr>
-<tr><td>75 kg</td><td>₹264</td><td>₹1,380</td><td>₹5,129</td><td>1340 kcal</td><td>130 g</td></tr>
-<tr><td>80 kg</td><td>₹269</td><td>₹1,406</td><td>₹5,218</td><td>1400 kcal</td><td>140 g</td></tr>
-<tr><td>85 kg</td><td>₹274</td><td>₹1,432</td><td>₹5,308</td><td>1460 kcal</td><td>150 g</td></tr>
-<tr><td>90 kg</td><td>₹279</td><td>₹1,458</td><td>₹5,398</td><td>1520 kcal</td><td>160 g</td></tr>
-<tr><td>95 kg</td><td>₹284</td><td>₹1,484</td><td>₹5,488</td><td>1580 kcal</td><td>170 g</td></tr>
-<tr><td>100 kg</td><td>₹289</td><td>₹1,510</td><td>₹5,578</td><td>1640 kcal</td><td>180 g</td></tr>
+<tr><td>40 kg</td><td>₹243</td><td>₹1,701</td><td>₹6,804</td><td>950 kcal</td><td>~76 g</td></tr>
+<tr><td>45 kg</td><td>₹283</td><td>₹1,981</td><td>₹7,924</td><td>1100 kcal</td><td>~83 g</td></tr>
+<tr><td>50 kg</td><td>₹293</td><td>₹2,051</td><td>₹8,204</td><td>1250 kcal</td><td>~90 g</td></tr>
+<tr><td>55 kg</td><td>₹303</td><td>₹2,121</td><td>₹8,484</td><td>1400 kcal</td><td>~97 g</td></tr>
+<tr><td>60 kg</td><td>₹313</td><td>₹2,191</td><td>₹8,764</td><td>1550 kcal</td><td>~104 g</td></tr>
+<tr><td>65 kg</td><td>₹323</td><td>₹2,261</td><td>₹9,044</td><td>1700 kcal</td><td>~111 g</td></tr>
+<tr><td>70 kg</td><td>₹333</td><td>₹2,331</td><td>₹9,324</td><td>1850 kcal</td><td>~118 g</td></tr>
+<tr><td>75 kg</td><td>₹343</td><td>₹2,401</td><td>₹9,604</td><td>2000 kcal</td><td>~125 g</td></tr>
+<tr><td>80 kg</td><td>₹353</td><td>₹2,471</td><td>₹9,884</td><td>2150 kcal</td><td>~132 g</td></tr>
+<tr><td>85 kg</td><td>₹363</td><td>₹2,541</td><td>₹10,164</td><td>2300 kcal</td><td>~139 g</td></tr>
+<tr><td>90 kg</td><td>₹373</td><td>₹2,611</td><td>₹10,444</td><td>2450 kcal</td><td>~146 g</td></tr>
+<tr><td>95 kg</td><td>₹383</td><td>₹2,681</td><td>₹10,724</td><td>2600 kcal</td><td>~153 g</td></tr>
+<tr><td>100 kg</td><td>₹393</td><td>₹2,751</td><td>₹11,004</td><td>2750 kcal</td><td>~160 g</td></tr>
+
 
     </tbody>
   </table>
@@ -198,8 +199,8 @@ select {
     <select id="planSelect">
       <option value="" disabled selected>Select Plan</option>
       <option value="Day Plan">Day Plan</option>
-      <option value="Weekly Plan - 10% OFF">Weekly Plan - 10% OFF</option>
-      <option value="Monthly Plan - 15% OFF">Monthly Plan - 15% OFF</option>
+      <option value="Weekly Plan - 5% OFF">Weekly Plan - 5% OFF</option>
+      <option value="Monthly Plan - 8% OFF">Monthly Plan - 8% OFF</option>
     </select>
 
     <button class="order-btn" onclick="orderSelectedPlan()">Order Now</button>
@@ -213,22 +214,26 @@ select {
   }
 
   function orderSelectedPlan() {
-    const bw = document.getElementById("bwSelect").value;
-    const plan = document.getElementById("planSelect").value;
+  const bw = document.getElementById("bwSelect").value;
+  const plan = document.getElementById("planSelect").value;
 
-    if (!bw || !plan) {
-      alert("Please select both Body Weight and Plan.");
-      return;
-    }
+  // Get goal automatically from <h2> tag
+  const goalText = document.querySelector("h2").innerText.trim();
 
-    const phone = "919611637807"; // Your WhatsApp number
-    const message = `Hi, I'm interested in the ${plan} for ${bw} body weight. Please share more details.`;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+  if (!bw || !plan) {
+    alert("Please select both Body Weight and Plan.");
+    return;
   }
+
+  const phone = "919611637807";
+  const message = `Hi, I'm interested in the ${plan} for ${bw} body weight. Goal: ${goalText}. Please share more details.`;
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+
+
 </script>
-
-
 
 </body>
 </html>
